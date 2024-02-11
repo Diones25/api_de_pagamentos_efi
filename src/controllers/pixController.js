@@ -6,37 +6,28 @@ const efipay = new EfiPay(options);
 const pixCreateImmediateCharge = (req, res) => {
   let body = {
     calendario: {
-      expiracao: 3600,
+      expiracao: req.body.calendario.expiracao,
     },
     devedor: {
-      cpf: '94271564656',
-      nome: 'Gorbadock Oldbuck',
+      cpf: req.body.devedor.cpf,
+      nome: req.body.devedor.nome,
     },
     valor: {
-      original: '123.45',
+      original: req.body.valor.original,
     },
-    chave: '1b7884d6-ce50-4edc-b45e-11d39b61470b', // Informe sua chave Pix cadastrada na efipay.	
-    infoAdicionais: [
-      {
-        nome: 'Pagamento em',
-        valor: 'NOME DO SEU ESTABELECIMENTO',
-      },
-      {
-        nome: 'Pedido',
-        valor: 'NUMERO DO PEDIDO DO CLIENTE',
-      },
-    ],
+    chave: req.body.chave, // Informe sua chave Pix cadastrada na efipay.	
   }
   
   efipay.pixCreateImmediateCharge([], body)
-    .then((resposta) => {
-      console.log(resposta)
-      res.send(resposta)
+    .then((response) => {
+      console.log(response)
+      return res.json(response)
     })
     .catch((error) => {
       console.log(error)
     })
 }
+
 
 module.exports = {
   pixCreateImmediateCharge

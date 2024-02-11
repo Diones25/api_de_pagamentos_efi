@@ -3,6 +3,6 @@ const pixController = require("../controllers/pixController.js")
 
 const router = Router();
 
-router.get("/", pixController.pixCreateImmediateCharge)
+router.post("/pix/create/immediate/charge", pixController.pixCreateImmediateCharge)
 
 module.exports = router;
